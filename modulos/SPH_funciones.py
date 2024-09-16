@@ -62,3 +62,13 @@ def func_presion_visc(lista_particulas):
                 fuerza_viscosidad = (1 - d_relativa) * mu * diff_v * norm_pos
                 particula.velocidad -= fuerza_viscosidad
                 particula_b.velocidad += fuerza_viscosidad
+
+# def aplicar_fuerza_vortice(lista_particulas, centro, constante_fuerza):
+#     '''Aplica una fuerza centrífuga inversamente proporcional a la distancia al centro del vórtice'''
+#     for particula in lista_particulas:
+#         # Calcula el vector desde la partícula hacia el centro del vórtice
+#         vector_centro = particula.posicion - np.array(centro)
+#         distancia = np.linalg.norm(vector_centro)
+#         if distancia > 0:
+#             # Aplica una fuerza centrífuga inversa a la distancia
+#             particula.fuerza += constante_fuerza * vector_centro / distancia            

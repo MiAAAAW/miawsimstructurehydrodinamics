@@ -127,3 +127,12 @@ class Particula():
         
         self.presion = K * (self.rho - rho0)
         self.presion_cercana = K_CERCANA * self.rho_cercana
+   
+    # def inicializar_velocidad_vortice(self, centro, velocidad_angular):
+    #     '''Inicializa la velocidad de la partícula para un movimiento circular en torno a un centro'''
+    #     # Vector de posición respecto al centro
+    #     vector_posicion = self.posicion - np.array(centro)
+    #     # Determina la dirección perpendicular para la velocidad
+    #     perpendicular = np.array([-vector_posicion[1], vector_posicion[0]])
+    #     # Normaliza el vector y lo multiplica por la velocidad angular
+    #     self.velocidad = velocidad_angular * perpendicular / np.linalg.norm(perpendicular)

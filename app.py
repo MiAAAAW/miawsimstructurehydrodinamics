@@ -1,35 +1,52 @@
-# 
-
 import tkinter as tk
 from tkinter import messagebox
 import modulos.SPH as SPH
+import modulos.Vortex as Vortex  # Importamos el módulo del vórtice
 
 class Interfaz(tk.Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Creamos el menú
+        # Configuración de la ventana principal
+        self.title("Simulación SPH y Vórtices")
+        self.geometry("1300x800")
+        self.resizable(False, False)
+
+        # Menú superior
         self.crear_menu()
 
-        # Iniciar SPH por defecto
-        self.cambiar_sph()
+        # Layout de dos columnas
+        self.columnconfigure(0, weight=1)  # Columna para SPH
+        self.columnconfigure(1, weight=1)  # Columna para Vórtice
+
+        # Crear el frame para la simulación SPH y Vortex
+        self.frame_sph = tk.Frame(self)
+        self.frame_sph.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+
+        self.frame_vortex = tk.Frame(self)
+        self.frame_vortex.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
+
+        # Inicializar las simulaciones
+        self.app_sph = SPH.SPH(self.frame_sph)  # El módulo SPH se encarga de sus propios botones
+        self.app_vortex = Vortex.Vortex(self.frame_vortex)  # El módulo Vortex se encargará de su simulación
 
     def crear_menu(self):
-        # Menú para la aplicación
-        self.barra_menu = tk.Menu(self)
-
-        # Menú de archivo con opción para salir
-        menu_archivo = tk.Menu(self.barra_menu, tearoff=0)
+        """Crear el menú superior."""
+        barra_menu = tk.Menu(self)
+        menu_archivo = tk.Menu(barra_menu, tearoff=0)
         menu_archivo.add_command(label="Salir", command=self.quit)
-        self.barra_menu.add_cascade(label="Archivo", menu=menu_archivo)
+        barra_menu.add_cascade(label="Archivo", menu=menu_archivo)
 
-        # Menú de ayuda
-        menu_ayuda = tk.Menu(self.barra_menu, tearoff=0)
+        menu_ayuda = tk.Menu(barra_menu, tearoff=0)
         menu_ayuda.add_command(label="Ayuda", command=self.ayuda_sph)
-        menu_ayuda.add_command(label="Acerca de", command=self.acerca_de)
-        self.barra_menu.add_cascade(label="Ayuda", menu=menu_ayuda)
+        barra_menu.add_cascade(label="Ayuda", menu=menu_ayuda)
 
-        self.config(menu=self.barra_menu)
+        self.config(menu=barra_menu)
+
+    def iniciar_simulaciones(self):
+        """Iniciar las simulaciones de SPH y Vórtices."""
+        self.app_sph.iniciar_simulacion()  # Iniciar simulación en SPH
+        self.app_vortex.iniciar_simulacion()  # Iniciar simulación en Vortex
 
     def ayuda_sph(self):
         texto_ayuda = (
@@ -50,27 +67,18 @@ class Interfaz(tk.Tk):
     def acerca_de(self):
         texto_acerca_de = (
             "SPHMODELX - Simulación de Fluidos con Hidrodinámica de Partículas Suavizadas (SPH)\n\n"
-            "Versión: 1.0.0\n"
-            "Fecha de lanzamiento: Abril 2024\n\n"
+            "Versión: 3.2.2\n"
+            "Fecha de lanzamiento: SEPTIEMBRE 2024\n\n"
             "Desarrollado por:\n"
-            "- Juan Pérez\n"
-            "- María López\n"
-            "- Carlos Gómez\n\n"
+            "MIAW"
             "Descripción:\n"
             "SPHMODELX es una aplicación diseñada para simular el comportamiento de fluidos y su interacción con estructuras sólidas utilizando el método SPH. Ideal para estudiantes, investigadores y profesionales en los campos de la física, ingeniería y animación por computadora.\n\n"
-            "Licencia:\n"
-            "Este software es de código abierto y está disponible bajo la licencia MIT.\n\n"
+            "Este software es de código abierto \n\n"
             "Contacto:\n"
-            "correo@ejemplo.com\n"
-            "Sitio web: www.sphmodelx.com"
         )
         messagebox.showinfo("Acerca de", texto_acerca_de)
 
-    def cambiar_sph(self):
-        # Iniciar SPH
-        print("Cambiando a SPHMODELX")
-        self.app = SPH.SPH(self)
-        self.app.run()
-
+    
 if __name__ == "__main__":
     interfaz = Interfaz()
+    interfaz.mainloop()

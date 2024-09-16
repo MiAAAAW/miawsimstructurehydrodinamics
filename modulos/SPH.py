@@ -1,4 +1,3 @@
-
 import numpy as np
 import tkinter as tk
 import matplotlib.pyplot as plt
@@ -32,17 +31,16 @@ class SPH():
     n = 15
     R1, M, T = 3.5, 0.85, 90
 
-    def __init__(self, master) -> None:
-        self.NOM_APPLI = "SPH"
+    def __init__(self, master):
+        self.master = master
+        self.NOM_APPLI = "SPHMODELX"
         self.anim = None
         self.configurar_ventana(master)
         self.crear_widgets()
 
     def configurar_ventana(self, master):
         self.root = master
-        self.root.title(self.NOM_APPLI)
         self.root.configure(bg="black")
-        self.root.resizable(False, False)
 
     def crear_widgets(self):
         self.crear_ventana_parametros()
@@ -219,4 +217,5 @@ class SPH():
         self.canvas_simulacion.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
     def run(self):
+        # Correr el mainloop de tkinter para la simulación SPH
         self.root.mainloop()
