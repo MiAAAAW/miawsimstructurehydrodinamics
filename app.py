@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox  # Ya no es necesario importar dos veces PhotoImage
 import modulos.SPH as SPH
-import modulos.Vortex as Vortex  # Importamos el módulo del vórtice
+import modulos.Vortex as Vortex
+
 
 class Interfaz(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -11,6 +12,13 @@ class Interfaz(tk.Tk):
         self.title("Simulación SPH y Vórtices")
         self.geometry("1300x800")
         self.resizable(False, False)
+
+        # Agregar ícono (cambia la ruta a tu archivo)
+        try:
+            icono = tk.PhotoImage(file="logox1.png")  # Asegúrate de que la ruta sea correcta
+            self.iconphoto(False, icono)
+        except Exception as e:
+            print(f"Error al cargar el ícono: {e}")
 
         # Menú superior
         self.crear_menu()
@@ -27,8 +35,8 @@ class Interfaz(tk.Tk):
         self.frame_vortex.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
 
         # Inicializar las simulaciones
-        self.app_sph = SPH.SPH(self.frame_sph)  # El módulo SPH se encarga de sus propios botones
-        self.app_vortex = Vortex.Vortex(self.frame_vortex)  # El módulo Vortex se encargará de su simulación
+        self.app_sph = SPH.SPH(self.frame_sph)
+        self.app_vortex = Vortex.Vortex(self.frame_vortex)
 
     def crear_menu(self):
         """Crear el menú superior."""
@@ -78,7 +86,7 @@ class Interfaz(tk.Tk):
         )
         messagebox.showinfo("Acerca de", texto_acerca_de)
 
-    
+
 if __name__ == "__main__":
     interfaz = Interfaz()
     interfaz.mainloop()

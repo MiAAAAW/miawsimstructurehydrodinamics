@@ -19,6 +19,7 @@ save_count = 60
 from modulos.SPH_particula import *
 from modulos.SPH_funciones import *
 from matplotlib.animation import PillowWriter
+from tkinter import messagebox, PhotoImage
 import shutil
 
 class SPH():
@@ -31,7 +32,7 @@ class SPH():
     n = 15
     R1, M, T = 3.5, 0.85, 90
 
-    def __init__(self, master):
+    def __init__(self, master)-> None: 
         self.master = master
         self.NOM_APPLI = "SPHMODELX"
         self.anim = None
